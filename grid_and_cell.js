@@ -29,6 +29,18 @@ class Grid {
         gridNode.style.margin = 'auto';
         return gridNode;
     }
+    getCellByPosition(row, column) {
+        return this.model[row][column];
+    }
+    resetClickedStatuses() {
+        for (let row of model) {
+            for (let cell of row) {
+                if (cell.clicked) {
+                    cell.toggleClickedStatus();
+                }
+            }
+        }
+    }
 }
 
 class Cell {
@@ -43,8 +55,18 @@ class Cell {
         cellNode.dataset.row = row;
         cellNode.dataset.column = column;
         this.nodeReference = cellNode;
+        this.clicked = false;
     }
-
+    swapStyle(oldClasses, newClasses) {
+        this.nodeReference.classList.remove(...oldClasses);
+        this.nodeReference.classList.add(...newClasses);
+    }
+    toggleClickedStatus() {
+        this.clicked = !this.clicked;
+        this.clicked
+            ? this.nodeReference.classList.add("clicked")
+            : this.nodeReference.classList.remove("clicked");
+    }
 }
 
 const gridParent = document.getElementById("grid-container");
