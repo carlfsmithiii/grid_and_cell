@@ -33,7 +33,7 @@ class Grid {
         return this.model[row][column];
     }
     resetClickedStatuses() {
-        for (let row of model) {
+        for (let row of this.model) {
             for (let cell of row) {
                 if (cell.clicked) {
                     cell.toggleClickedStatus();
