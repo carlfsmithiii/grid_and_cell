@@ -38,8 +38,8 @@ class Cell {
         this.options = cellOptions;
         const cellNode = document.createElement("div");
         cellNode.classList.add(...this.options.classList);
-        cellNode.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
-        cellNode.style.border = '1px solid white';
+        cellNode.style.backgroundColor = cellOptions.backgroundColor || 'rgba(0, 0, 0, 0.1)';
+        cellNode.style.border = cellOptions.border || '1px solid white';
         cellNode.dataset.row = row;
         cellNode.dataset.column = column;
         this.nodeReference = cellNode;
