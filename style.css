@@ -1,0 +1,10 @@
+#grid-container {
+    margin: auto;
+    height: 90vh;   
+    width: 90vh;
+}
+
+.cell {
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid white;
+}

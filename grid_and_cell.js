@@ -1,22 +1,23 @@
 class Grid {
-    constructor({rowCount, columnCount, parentNode, cellOptionsObject}) {
+    constructor({rowCount, columnCount, parentNode, cellOptions}) {
         this.rowCount = rowCount;
         this.columnCount = columnCount;
-        this._createGrid(parentNode);
+        this.nodeReference = this._createGrid(parentNode, cellOptions);
+        parentNode.appendChild(this.nodeReference);
     }
-    _createGrid(parentNode) {
+    _createGrid(parentNode, cellOptions) {
         this.model = [];
-        this.nodeReference = this._createGrideNode();
-        parentNode.appendchild(this.nodeReference);
+        const gridNode = this._createGridNode();
 
         for (let row = 0; row < this.rowCount; row++) {
-            model.push([]);
+            this.model.push([]);
             for (let column = 0; column < this.columnCount; column++) {
-                const cell = new Cell({column, row});
-                model[row][column] = cell;
-                this.nodeReference.appendchild(cell.nodeReference);
+                const cell = new Cell({column, row, cellOptions});
+                this.model[row][column] = cell;
+                gridNode.appendChild(cell.nodeReference);
             }
         }
+        return gridNode;
     }
     _createGridNode() {
         const gridNode = document.createElement("div");
@@ -30,11 +31,11 @@ class Grid {
 }
 
 class Cell {
-    constructor({row, column, optionsObject}) {
+    constructor({row, column, cellOptions}) {
         this.row = row;
         this.column = column;
-        this.options = optionsObject;
-        const cellNode = document.createElementById("div");
+        this.options = cellOptions;
+        const cellNode = document.createElement("div");
         cellNode.classList.add(...this.options.classList);
         cellNode.dataset.row = row;
         cellNode.dataset.column = column;
@@ -42,3 +43,6 @@ class Cell {
     }
 
 }
+
+const gridParent = document.getElementById("grid-container");
+const grid = new Grid({rowCount: 5, columnCount: 5, parentNode: gridParent, cellOptions: {classList: ["cell"]}});
