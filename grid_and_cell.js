@@ -67,6 +67,7 @@ class Cell {
         cellNode.dataset.column = column;
         this.nodeReference = cellNode;
         this.clicked = false;
+        cellNode.onclick = () => this.toggleClickedStatus();
     }
     swapStyle(oldClasses, newClasses) {
         this.nodeReference.classList.remove(...oldClasses);
