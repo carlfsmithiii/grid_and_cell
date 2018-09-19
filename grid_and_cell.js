@@ -1,13 +1,17 @@
 class Grid {
-    constructor({rowCount, columnCount, parentNode, cellOptions}) {
+    constructor({rowCount, columnCount, parentNode, gridOptions, cellOptions}) {
         this.rowCount = rowCount;
         this.columnCount = columnCount;
-        this.nodeReference = this._createGrid(parentNode, cellOptions);
+        this.options = gridOptions;
+        this.nodeReference = this._createGrid(cellOptions);
         parentNode.appendChild(this.nodeReference);
     }
-    _createGrid(parentNode, cellOptions) {
+    _createGrid(cellOptions) {
         this.model = [];
         const gridNode = this._createGridNode();
+        gridNode.classList.add(...this.options.classList);
+        gridNode.style.setProperty('--row-count', this.rowCount);
+        gridNode.style.setProperty('--column-count', this.columnCount);
 
         for (let row = 0; row < this.rowCount; row++) {
             this.model.push([]);
@@ -24,9 +28,6 @@ class Grid {
         gridNode.style.display = 'grid';
         gridNode.style.gridTemplateRows = `repeat(${this.rowCount}, 1fr)`;
         gridNode.style.gridTemplateColumns = `repeat(${this.columnCount}, 1fr)`;
-        gridNode.style.width = '90vh';
-        gridNode.style.height = '90vh';
-        gridNode.style.margin = 'auto';
         return gridNode;
     }
     getCellByPosition(row, column) {
@@ -82,4 +83,10 @@ class Cell {
 }
 
 const gridParent = document.getElementById("grid-container");
-const grid = new Grid({rowCount: 5, columnCount: 5, parentNode: gridParent, cellOptions: {classList: ["cell"]}});
+const grid = new Grid({
+    rowCount: 5, 
+    columnCount: 5, 
+    parentNode: gridParent, 
+    gridOptions: {classList: ["grid"]},
+    cellOptions: {classList: ["cell"]}
+});

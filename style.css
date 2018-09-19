@@ -1,6 +1,19 @@
+* {
+    --grid-height: 80vh;
+    --cell-dimension: calc(var(--grid-height) / var(--row-count));
+}
+
+.grid {
+    height: var(--grid-height);
+    width: calc(var(--cell-dimension) * var(--column-count)); 
+    margin: auto;
+}
+
 .cell {
     background-color: rgba(0, 0, 0, 0.1);
     border: 1px solid white;
+    height: var(--cell-dimension);
+    width: var(--cell-dimension);
 }
 
 .clicked {
