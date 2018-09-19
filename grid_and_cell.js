@@ -41,6 +41,19 @@ class Grid {
             }
         }
     }
+    getNeighborsOf(cell) {
+        const cellRow = cell.row;
+        const cellColumn = cell.column;
+        const neighborsList = [];
+        for (let row = Math.max(0, Number(cellRow) - 1); row < Math.min(this.rowCount, Number(cellRow) + 2); row++) {
+            for (let column = Math.max(0, cellColumn - 1); column < Math.min(this.columnCount, cellColumn + 2); column++) {
+                if (!(row === cellRow && column === cellColumn)) {
+                    neighborsList.push(this.model[row][column]);
+                }
+            }
+        }
+        return neighborsList;
+    }
 }
 
 class Cell {
