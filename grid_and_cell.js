@@ -24,8 +24,9 @@ class Grid {
         gridNode.style.display = 'grid';
         gridNode.style.gridTemplateRows = `repeat(${this.rowCount}, 1fr)`;
         gridNode.style.gridTemplateColumns = `repeat(${this.columnCount}, 1fr)`;
-        gridNode.style.width = '100%';
-        gridNode.style.height = '100%';
+        gridNode.style.width = '90vh';
+        gridNode.style.height = '90vh';
+        gridNode.style.margin = 'auto';
         return gridNode;
     }
 }
@@ -37,6 +38,8 @@ class Cell {
         this.options = cellOptions;
         const cellNode = document.createElement("div");
         cellNode.classList.add(...this.options.classList);
+        cellNode.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
+        cellNode.style.border = '1px solid white';
         cellNode.dataset.row = row;
         cellNode.dataset.column = column;
         this.nodeReference = cellNode;
