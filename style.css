@@ -3,6 +3,10 @@
     --cell-dimension: calc(var(--grid-height) / var(--row-count));
 }
 
+body {
+    background-color: #646464;
+}
+
 .grid {
     height: var(--grid-height);
     width: calc(var(--cell-dimension) * var(--column-count)); 

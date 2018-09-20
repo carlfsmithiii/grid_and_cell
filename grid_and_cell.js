@@ -75,10 +75,17 @@ class Cell {
         this.nodeReference.classList.add(...newClasses);
     }
     toggleClickedStatus() {
-        this.clicked = !this.clicked;
         this.clicked
-            ? this.nodeReference.classList.add("clicked")
-            : this.nodeReference.classList.remove("clicked");
+            ? this.setAsNotClicked()
+            : this.setAsClicked();
+    }
+    setAsClicked() {
+        this.clicked = true;
+        this.nodeReference.classList.add("clicked");
+    }
+    setAsNotClicked() {
+        this.clicked = false;
+        this.nodeReference.classList.remove("clicked");
     }
 }
 
