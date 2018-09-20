@@ -9,7 +9,7 @@ class Grid {
     _createGrid(cellOptions) {
         this.model = [];
         const gridNode = this._createGridNode();
-        gridNode.classList.add(...this.options.classList || "grid");
+        gridNode.classList.add(...this.options.classList || ["grid"]);
         gridNode.style.setProperty('--row-count', this.rowCount);
         gridNode.style.setProperty('--column-count', this.columnCount);
 
@@ -63,7 +63,7 @@ class Cell {
         this.column = column;
         this.options = cellOptions || {classList: ['cell']};
         const cellNode = document.createElement("div");
-        cellNode.classList.add(...this.options.classList);
+        cellNode.classList.add(...this.options.classList || ['cell']);
         cellNode.dataset.row = row;
         cellNode.dataset.column = column;
         this.nodeReference = cellNode;
@@ -86,7 +86,5 @@ const gridParent = document.getElementById("grid-container");
 const grid = new Grid({
     rowCount: 5, 
     columnCount: 5, 
-    parentNode: gridParent, 
-    // gridOptions: {classList: ["grid"]},
-    // cellOptions: {classList: ["cell"]}
+    parentNode: gridParent
 });
