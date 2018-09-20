@@ -68,7 +68,11 @@ class Cell {
         cellNode.dataset.column = column;
         this.nodeReference = cellNode;
         this.clicked = false;
-        cellNode.onclick = () => this.toggleClickedStatus();
+        cellNode.onclick = (event) => {
+            this.options.onclick
+                ? this.options.onclick.call(this)
+                : this.toggleClickedStatus();
+        }
     }
     swapStyle(oldClasses, newClasses) {
         Array.isArray(oldClasses)
@@ -89,7 +93,7 @@ class Cell {
     }
     setAsNotClicked() {
         this.clicked = false;
-        this.nodeReverence.classList.remove("clicked");
+        this.nodeReference.classList.remove("clicked");
     }
 }
 
@@ -97,5 +101,10 @@ const gridParent = document.getElementById("grid-container");
 const grid = new Grid({
     rowCount: 5, 
     columnCount: 5, 
-    parentNode: gridParent
+    parentNode: gridParent,
+    cellOptions: {
+        onclick: function() {
+            this.toggleClickedStatus();
+        }
+    }
 });
