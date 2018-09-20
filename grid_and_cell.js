@@ -71,13 +71,17 @@ class Cell {
         cellNode.onclick = () => this.toggleClickedStatus();
     }
     swapStyle(oldClasses, newClasses) {
-        this.nodeReference.classList.remove(...oldClasses);
-        this.nodeReference.classList.add(...newClasses);
+        Array.isArray(oldClasses)
+            ? this.nodeReference.classList.remove(...oldClasses)
+            : this.nodeReference.classList.remove(oldClasses);
+        Array.isArray(newClasses) 
+            ? this.nodeReference.classList.add(...newClasses)
+            : this.nodeReference.classList.add(newClasses);
     }
     toggleClickedStatus() {
         this.clicked
             ? this.setAsNotClicked()
-            : this.setAsClicked();
+            : this.setAsClicked()
     }
     setAsClicked() {
         this.clicked = true;
@@ -85,7 +89,7 @@ class Cell {
     }
     setAsNotClicked() {
         this.clicked = false;
-        this.nodeReference.classList.remove("clicked");
+        this.nodeReverence.classList.remove("clicked");
     }
 }
 
