@@ -34,13 +34,7 @@ class Grid {
         return this.model[row][column];
     }
     resetClickedStatuses() {
-        for (let row of this.model) {
-            for (let cell of row) {
-                if (cell.clicked) {
-                    cell.toggleClickedStatus();
-                }
-            }
-        }
+        this.model.flat(2).forEach(cell => cell.setAsNotClicked());
     }
     getNeighborsOf(cell) {
         const cellRow = cell.row;
