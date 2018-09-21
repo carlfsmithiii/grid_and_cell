@@ -2,17 +2,14 @@ class Grid {
     constructor({rowCount, columnCount, parentNode, gridOptions, cellOptions}) {
         this.rowCount = rowCount;
         this.columnCount = columnCount;
-        this.options = gridOptions || {classList: ['grid']};
+        this.options = gridOptions;
         this.nodeReference = this._createGrid(cellOptions);
         parentNode.appendChild(this.nodeReference);
     }
     _createGrid(cellOptions) {
         this.model = [];
         const gridNode = this._createGridNode();
-        gridNode.classList.add(...this.options.classList || ["grid"]);
-        gridNode.style.setProperty('--row-count', this.rowCount);
-        gridNode.style.setProperty('--column-count', this.columnCount);
-
+        
         for (let row = 0; row < this.rowCount; row++) {
             this.model.push([]);
             for (let column = 0; column < this.columnCount; column++) {
@@ -28,6 +25,13 @@ class Grid {
         gridNode.style.display = 'grid';
         gridNode.style.gridTemplateRows = `repeat(${this.rowCount}, 1fr)`;
         gridNode.style.gridTemplateColumns = `repeat(${this.columnCount}, 1fr)`;
+        gridNode.classList.add('grid');
+        if (this.options && this.options.classList) {
+            gridNode.classList.add(...this.options.classList);
+        }
+        gridNode.style.setProperty('--row-count', this.rowCount);
+        gridNode.style.setProperty('--column-count', this.columnCount);
+
         return gridNode;
     }
     getCellByPosition(row, column) {
@@ -56,12 +60,6 @@ class Cell {
         this.row = row;
         this.column = column;
         this.options = cellOptions;
-        // this.options = cellOptions || {classList: ['cell']};
-        // const cellNode = document.createElement("div");
-        // cellNode.classList.add(...this.options.classList || ['cell']);
-        // cellNode.dataset.row = row;
-        // cellNode.dataset.column = column;
-        // this.nodeReference = cellNode;
         this.nodeReference = this._createCellNode();
         this.clicked = false;
         // cellNode.onclick = (event) => {
@@ -73,7 +71,7 @@ class Cell {
     _createCellNode() {
         const cellNode = document.createElement('div');
         cellNode.classList.add('cell');
-        if (this.options.classList) {
+        if (this.options && this.options.classList) {
             cellNode.classList.add(...this.options.classList);
         }
         cellNode.dataset.row = this.row;
