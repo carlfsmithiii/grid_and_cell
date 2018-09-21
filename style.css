@@ -30,3 +30,12 @@ body {
 .clicked {
     background-color: #FFFF00;
 }
+
+
+.blue {
+    background-color: blue;
+}
+
+.black-border {
+    border: 1px solid black;
+}

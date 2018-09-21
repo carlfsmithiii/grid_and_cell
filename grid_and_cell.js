@@ -55,18 +55,31 @@ class Cell {
     constructor({row, column, cellOptions}) {
         this.row = row;
         this.column = column;
-        this.options = cellOptions || {classList: ['cell']};
-        const cellNode = document.createElement("div");
-        cellNode.classList.add(...this.options.classList || ['cell']);
-        cellNode.dataset.row = row;
-        cellNode.dataset.column = column;
-        this.nodeReference = cellNode;
+        this.options = cellOptions;
+        // this.options = cellOptions || {classList: ['cell']};
+        // const cellNode = document.createElement("div");
+        // cellNode.classList.add(...this.options.classList || ['cell']);
+        // cellNode.dataset.row = row;
+        // cellNode.dataset.column = column;
+        // this.nodeReference = cellNode;
+        this.nodeReference = this._createCellNode();
         this.clicked = false;
-        cellNode.onclick = (event) => {
-            this.options.onclick
-                ? this.options.onclick.call(this)
-                : this.toggleClickedStatus();
+        // cellNode.onclick = (event) => {
+        //     this.options.onclick
+        //         ? this.options.onclick.call(this)
+        //         : this.toggleClickedStatus();
+        // }
+    }
+    _createCellNode() {
+        const cellNode = document.createElement('div');
+        cellNode.classList.add('cell');
+        if (this.options.classList) {
+            cellNode.classList.add(...this.options.classList);
         }
+        cellNode.dataset.row = this.row;
+        cellNode.dataset.column = this.column;
+        cellNode.cellInstance = this;
+        return cellNode;
     }
     swapStyle(oldClasses, newClasses) {
         Array.isArray(oldClasses)
@@ -99,6 +112,10 @@ const grid = new Grid({
     cellOptions: {
         onclick: function() {
             this.toggleClickedStatus();
-        }
+        },
+        // classList: [
+        //     "blue",
+        //     "black-border"
+        // ]
     }
 });
