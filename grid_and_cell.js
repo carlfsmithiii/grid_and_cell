@@ -115,9 +115,5 @@ const grid = new Grid({
         onclick: function() {
             this.toggleClickedStatus();
         },
-        // classList: [
-        //     "blue",
-        //     "black-border"
-        // ]
     }
 });
